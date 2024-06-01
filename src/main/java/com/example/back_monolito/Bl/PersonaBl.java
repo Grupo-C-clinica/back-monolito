@@ -2,12 +2,17 @@ package com.example.back_monolito.Bl;
 
 
 import com.example.back_monolito.Dao.PersonaRepository;
+import com.example.back_monolito.Dto.PacienteViewDto;
 import com.example.back_monolito.Dto.PersonaDto;
 import com.example.back_monolito.Entity.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PersonaBl {
     @Autowired
@@ -26,6 +31,19 @@ public class PersonaBl {
         else
             pagePersonas = personaRepository.findAllPacientesOrderByNombreDesc(pageable);
         return pagePersonas.map(persona -> new PersonaDto(persona.getIdPersona(), persona.getNombre(), persona.getApellidoP(),persona.getApellidoM(), persona.getFechaNacimiento(), persona.getGenero(), persona.getTelefono(), persona.getCi(), persona.getStatus()));
+    }
+
+    public List<PacienteViewDto> findAllPacientes() {
+        List<PacienteViewDto> personas = personaRepository.findAllPaciente();
+        return personas.stream()
+                .map(persona -> new PacienteViewDto(
+                        persona.getIdPaciente(),
+                        persona.getNombre(),
+                        persona.getApellidoP(),
+                        persona.getApellidoM(),
+                        persona.getFechaNacimiento(),
+                        persona.getGenero()))
+                .collect(Collectors.toList());
     }
 
 

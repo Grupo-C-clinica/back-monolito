@@ -46,13 +46,28 @@ public class PacienteApi {
     public ResponseEntity<ResponseDto<Page<PersonaDto>>> findPacientes(
             @PageableDefault(page = 0, size = 10) Pageable pageable)
     {try {
-            Page<PersonaDto> pacientes = personaBl.findPeronasPacientes(pageable);
-            if (!pacientes.isEmpty()) {
+        Page<PersonaDto> pacientes = personaBl.findPeronasPacientes(pageable);
+        if (!pacientes.isEmpty()) {
+            return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
+        } else {
+            return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
+    }
+    }
+
+    @GetMapping(path = "/todos")
+    public ResponseEntity<ResponseDto<List<PacienteViewDto>>> findPacientesSin(){
+        try {
+            List<PacienteViewDto> pacientes = personaBl.findAllPacientes();
+            if (!pacientes.isEmpty()){
                 return ResponseEntity.ok(new ResponseDto<>(200, pacientes, "Pacientes encontrados"));
-            } else {
+            }else{
                 return ResponseEntity.ok(new ResponseDto<>(200, null, "No se encontraron pacientes"));
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al mostrar pacientes"));
         }
