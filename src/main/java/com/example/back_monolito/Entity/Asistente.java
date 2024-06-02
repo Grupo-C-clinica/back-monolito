@@ -1,15 +1,14 @@
 package com.example.back_monolito.Entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "DOCTOR")
-public class Doctor {
+@Table(name = "ASISTENTE")
+public class Asistente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_DOCTOR")
-    private Integer idDoctor;
+    @Column(name = "ID_ASISTENTE")
+    private Integer idAsistente;
 
     @Column(name = "ID_PERSONA", nullable = false)
     private Integer idPersona;
@@ -26,11 +25,11 @@ public class Doctor {
     @Column(name = "STATUS", nullable = false)
     private Boolean status;
 
-    public Doctor() {
+    public Asistente() {
     }
 
-    public Doctor(Integer idDoctor, Integer idPersona, String username, String correo, String password, Boolean status) {
-        this.idDoctor = idDoctor;
+    public Asistente(Integer idAsistente, Integer idPersona, String username, String correo, String password, Boolean status) {
+        this.idAsistente = idAsistente;
         this.idPersona = idPersona;
         this.username = username;
         this.correo = correo;
@@ -38,13 +37,12 @@ public class Doctor {
         this.status = status;
     }
 
-
-    public Integer getIdDoctor() {
-        return idDoctor;
+    public Integer getIdAsistente() {
+        return idAsistente;
     }
 
-    public void setIdDoctor(Integer idDoctor) {
-        this.idDoctor = idDoctor;
+    public void setIdAsistente(Integer idAsistente) {
+        this.idAsistente = idAsistente;
     }
 
     public Integer getIdPersona() {
@@ -89,8 +87,8 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                "idDoctor=" + idDoctor +
+        return "Asistente{" +
+                "idAsistente=" + idAsistente +
                 ", idPersona=" + idPersona +
                 ", username='" + username + '\'' +
                 ", correo='" + correo + '\'' +
