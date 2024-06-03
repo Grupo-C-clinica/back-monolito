@@ -1,21 +1,24 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ClinicaOtorrino
-    username: postgres
-    password: AllSafe6
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
-        show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
 server:
   port: 8805
 
@@ -23,4 +26,3 @@ minio:
   url: http://localhost:9000
   access-key: minioadmin
   secret-key: minioadmin
-
