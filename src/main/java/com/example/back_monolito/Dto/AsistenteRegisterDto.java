@@ -2,7 +2,7 @@ package com.example.back_monolito.Dto;
 
 import java.util.Date;
 
-public class DoctorRegisterDto {
+public class AsistenteRegisterDto {
     private String nombre;
     private String apellidoP;
     private String apellidoM;
@@ -14,10 +14,10 @@ public class DoctorRegisterDto {
     private String username;
     private String password;
 
-    public DoctorRegisterDto() {
+    public AsistenteRegisterDto() {
     }
 
-    public DoctorRegisterDto(String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String genero, String telefono, String ci, String correo, String username, String password) {
+    public AsistenteRegisterDto(String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String genero, String telefono, String ci, String correo, String username, String password) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -108,21 +108,5 @@ public class DoctorRegisterDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "DoctorRegisterDto{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidoP='" + apellidoP + '\'' +
-                ", apellidoM='" + apellidoM + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", genero='" + genero + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", ci='" + ci + '\'' +
-                ", correo='" + correo + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
