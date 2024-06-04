@@ -17,7 +17,7 @@ public class AsistenteApi {
     public ResponseEntity<ResponseDto<PersonalRegisterDto>> updateDoctor(@RequestBody PersonalRegisterDto asistenteDto, @PathVariable Integer idAsistente){
         try{
             asistenteBl.updateAsistente(asistenteDto, idAsistente);
-            return ResponseEntity.ok(new ResponseDto<>(200, null, "Asistente modificado"));
+            return ResponseEntity.ok(new ResponseDto<>(200, asistenteDto, "Asistente modificado"));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al modificar asistente"));

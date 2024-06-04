@@ -62,6 +62,7 @@ public class AsistenteBl {
             asistente.setPassword(personalRegisterDto.getPassword());
             asistente.setUsername(personalRegisterDto.getUsername());
             asistente.setStatus(true);
+            asistenteRepository.save(asistente);
         }catch (Exception e){
             e.printStackTrace();
         }
