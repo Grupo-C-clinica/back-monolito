@@ -29,6 +29,7 @@ public class AsistenteBl {
             persona.setCi(personalRegisterDto.getCi());
             persona.setTelefono(personalRegisterDto.getTelefono());
             persona.setGenero(personalRegisterDto.getGenero());
+            persona.setStatus(true);
             personaRepository.save(persona);
 
             Asistente asistente = new Asistente();
