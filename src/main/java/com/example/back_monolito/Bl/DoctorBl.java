@@ -30,6 +30,7 @@ public class DoctorBl {
             persona.setCi(doctorDto.getCi());
             persona.setTelefono(doctorDto.getTelefono());
             persona.setGenero(doctorDto.getGenero());
+            persona.setStatus(true);
             personaRepository.save(persona);
 
             doctor.setCorreo(doctorDto.getCorreo());
@@ -55,6 +56,7 @@ public class DoctorBl {
             persona.setCi(doctorRegisterDto.getCi());
             persona.setTelefono(doctorRegisterDto.getTelefono());
             persona.setGenero(doctorRegisterDto.getGenero());
+            persona.setStatus(true);
             personaRepository.save(persona);
 
             Doctor doctor = new Doctor();
