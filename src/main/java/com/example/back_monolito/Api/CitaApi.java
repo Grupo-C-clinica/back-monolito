@@ -84,7 +84,7 @@ public class CitaApi {
             citaBl.borrarCita(citaId);
             return ResponseEntity.ok(new ResponseDto<>(200, null, "La cita se borro correctamente"));
         }catch (Exception e){
-            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al borrar la cota"));
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al borrar la cita"));
         }
     }
 

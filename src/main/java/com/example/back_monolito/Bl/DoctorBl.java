@@ -4,6 +4,7 @@ import com.example.back_monolito.Dao.DoctorRepository;
 import com.example.back_monolito.Dao.PersonaRepository;
 import com.example.back_monolito.Dto.DoctorDto;
 import com.example.back_monolito.Dto.PersonalRegisterDto;
+import com.example.back_monolito.Entity.Asistente;
 import com.example.back_monolito.Entity.Doctor;
 import com.example.back_monolito.Entity.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,28 @@ public class DoctorBl {
     private PersonaRepository personaRepository;
 
     //Modificar un paciente
-    public void updateDoctor(DoctorDto doctorDto, Integer idDoctor){
+    public void updateDoctor(PersonalRegisterDto doctorDto, Integer idDoctor){
         try{
             Doctor doctor = doctorRepository.findById(idDoctor)
                     .orElseThrow(() -> new RuntimeException("Doctor no encontrado"));
             Persona persona = doctor.getPersona();
-        } catch (Exception e){
+            persona.setNombre(doctorDto.getNombre());
+            persona.setApellidoP(doctorDto.getApellidoP());
+            persona.setApellidoM(doctorDto.getApellidoM());
+            persona.setFechaNacimiento(doctorDto.getFechaNacimiento());
+            persona.setCi(doctorDto.getCi());
+            persona.setTelefono(doctorDto.getTelefono());
+            persona.setGenero(doctorDto.getGenero());
+            personaRepository.save(persona);
 
+            doctor.setCorreo(doctorDto.getCorreo());
+            doctor.setPassword(doctorDto.getPassword());
+            doctor.setUsername(doctorDto.getUsername());
+            doctor.setStatus(true);
+            doctorRepository.save(doctor);
+
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -54,4 +70,35 @@ public class DoctorBl {
         }
     }
 
+    public void changePassword (Integer idDoctor, String newPassword){
+        try{
+            Doctor doctor = doctorRepository.findById(idDoctor)
+                    .orElseThrow(() -> new RuntimeException("Doctor no encontrado"));
+            doctor.setPassword(newPassword);
+            doctorRepository.save(doctor);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void changePasswordByUsername(String username, String newPassword){
+        try{
+            Doctor doctor = doctorRepository.findDoctorByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("Doctor no encontrado"));
+            doctor.setPassword(newPassword);
+            doctorRepository.save(doctor);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarDoctor(Integer idDoctor){
+        try{
+            Doctor doctor = doctorRepository.findById(idDoctor)
+                    .orElseThrow(() -> new RuntimeException("Asistente no Encontrado"));
+            doctor.setStatus(false);
+            doctorRepository.save(doctor);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
