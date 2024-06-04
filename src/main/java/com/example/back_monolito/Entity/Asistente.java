@@ -11,7 +11,7 @@ public class Asistente {
     private Integer idAsistente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "ID_PERSONA", nullable = false)
+    @JoinColumn(name = "ID_PERSONA", nullable = false)
     private Persona persona;
 
     @Column(name = "USERNAME", nullable = false)

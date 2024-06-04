@@ -12,7 +12,7 @@ public class Doctor {
     private Integer idDoctor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "ID_PERSONA", nullable = false)
+    @JoinColumn(name = "ID_PERSONA", nullable = false)
     private Persona persona;
 
     @Column(name = "USERNAME", nullable = false)
