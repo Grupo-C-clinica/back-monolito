@@ -1,5 +1,6 @@
 package com.example.back_monolito.Api;
 
+import com.example.back_monolito.Bl.AsistenteBl;
 import com.example.back_monolito.Bl.DoctorBl;
 import com.example.back_monolito.Bl.PersonaBl;
 import com.example.back_monolito.Dto.DoctorDto;
@@ -17,12 +18,20 @@ public class DoctorApi {
     private DoctorBl doctorBl;
     @Autowired
     private PersonaBl personaBl;
+    @Autowired
+    private AsistenteBl asistenteBl;
 
-    @PutMapping(path = "/{idDoctor}")
-    public ResponseEntity<ResponseDto<PersonalRegisterDto>> updateDoctor(@RequestBody PersonalRegisterDto doctorDto, @PathVariable Integer idDoctor){
+    @PutMapping(path = "/{personal}/{idDoctor}")
+    public ResponseEntity<ResponseDto<PersonalRegisterDto>> updateDoctor(@RequestBody PersonalRegisterDto doctorDto, @PathVariable Integer idDoctor, @PathVariable String personal){
         try{
-            doctorBl.updateDoctor(doctorDto, idDoctor);
-            return ResponseEntity.ok(new ResponseDto<>(200, null, "Doctor modificado"));
+            if (personal.equals("doctor")){
+                doctorBl.updateDoctor(doctorDto, idDoctor);
+                return ResponseEntity.ok(new ResponseDto<>(200, doctorDto, "Doctor modificado"));
+            }else if (personal.equals("asistente")){
+                asistenteBl.updateAsistente(doctorDto, idDoctor);
+                return ResponseEntity.ok(new ResponseDto<>(200, doctorDto, "Asistente modificado"));
+            }
+            return ResponseEntity.ok(new ResponseDto<>(400, null, "Registration failed"));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al modificar doctor"));
