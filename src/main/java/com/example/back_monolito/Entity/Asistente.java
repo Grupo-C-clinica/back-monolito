@@ -10,8 +10,9 @@ public class Asistente {
     @Column(name = "ID_ASISTENTE")
     private Integer idAsistente;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "ID_PERSONA", nullable = false)
-    private Integer idPersona;
+    private Persona persona;
 
     @Column(name = "USERNAME", nullable = false)
     private String username;
@@ -28,9 +29,9 @@ public class Asistente {
     public Asistente() {
     }
 
-    public Asistente(Integer idAsistente, Integer idPersona, String username, String correo, String password, Boolean status) {
+    public Asistente(Integer idAsistente, Persona persona, String username, String correo, String password, Boolean status) {
         this.idAsistente = idAsistente;
-        this.idPersona = idPersona;
+        this.persona = persona;
         this.username = username;
         this.correo = correo;
         this.password = password;
@@ -45,12 +46,12 @@ public class Asistente {
         this.idAsistente = idAsistente;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     public String getUsername() {
@@ -89,7 +90,7 @@ public class Asistente {
     public String toString() {
         return "Asistente{" +
                 "idAsistente=" + idAsistente +
-                ", idPersona=" + idPersona +
+                ", persona=" + persona +
                 ", username='" + username + '\'' +
                 ", correo='" + correo + '\'' +
                 ", password='" + password + '\'' +
