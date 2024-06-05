@@ -12,7 +12,7 @@ public class CorsConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("https://grupo-c-clinica.github.io"); // Especifica el origen permitido
+        corsConfiguration.addAllowedOrigin("https://grupo-c-clinica.github.io/**"); // Especifica el origen permitido
         corsConfiguration.addAllowedHeader("*"); // Permite todos los headers
         corsConfiguration.addAllowedMethod("*"); // Permite todos los métodos HTTP
         corsConfiguration.setAllowCredentials(true); // Permite el uso de credenciales
