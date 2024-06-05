@@ -5,14 +5,16 @@ public class TokenDto {
     private String token;
     private Integer id;
     private String rol;
+    private String name;
 
     public TokenDto() {
     }
 
-    public TokenDto(String token, Integer id, String rol) {
+    public TokenDto(String token, Integer id, String rol, String name) {
         this.token = token;
         this.id = id;
         this.rol = rol;
+        this.name = name;
     }
 
     public String getToken() {
@@ -39,12 +41,21 @@ public class TokenDto {
         this.rol = rol;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "TokenDTO{" +
+        return "TokenDto{" +
                 "token='" + token + '\'' +
                 ", id=" + id +
-                ", rol=" + rol +
+                ", rol='" + rol + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

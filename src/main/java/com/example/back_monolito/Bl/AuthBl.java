@@ -41,21 +41,21 @@ public class AuthBl {
                 doctor = doctorRepository.findDoctorByUsernameAndPassword(username, password);
                 if (doctor != null) {
                     token = generateToken(doctor.getIdDoctor());
-                    return new TokenDto(token, doctor.getIdDoctor(), "doctor");
+                    return new TokenDto(token, doctor.getIdDoctor(), "doctor", doctor.getPersona().getNombre());
                 }
             }
             if (i == 1) {
                 asistente = asistenteRepository.findAsistenteByUsernameAndPassword(username, password);
                 if (asistente != null) {
                     token = generateToken(asistente.getIdAsistente());
-                    return new TokenDto(token, asistente.getIdAsistente(), "asistente");
+                    return new TokenDto(token, asistente.getIdAsistente(), "asistente", asistente.getPersona().getNombre());
                 }
             }
             if (i == 2) {
                 admin = adminRepository.findAdminByUsernameAndPassword(username, password);
                 if (admin != null) {
                     token = generateToken(asistente.getIdAsistente());
-                    return new TokenDto(token, admin.getIdAdmin(), "admin");
+                    return new TokenDto(token, admin.getIdAdmin(), "admin", admin.getPersona().getNombre());
                 }
             }
             if (doctor == null && asistente == null && admin == null) {
