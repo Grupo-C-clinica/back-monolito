@@ -32,6 +32,7 @@ public class UsuarioBl {
             dto.setTelefono(doctor.getPersona().getTelefono());
             dto.setCorreo(doctor.getCorreo());
             dto.setUsername(doctor.getUsername());
+            dto.setRol("doctor");
             usuarios.add(dto);
         }
 
@@ -45,6 +46,7 @@ public class UsuarioBl {
             dto.setTelefono(asistente.getPersona().getTelefono());
             dto.setCorreo(asistente.getCorreo());
             dto.setUsername(asistente.getUsername());
+            dto.setRol("asistente");
             usuarios.add(dto);
         }
         return usuarios;

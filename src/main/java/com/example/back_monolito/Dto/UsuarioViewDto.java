@@ -7,17 +7,19 @@ public class UsuarioViewDto {
     private String telefono;
     private String correo;
     private String username;
+    private String rol;
 
     public UsuarioViewDto() {
     }
 
-    public UsuarioViewDto(String nombre, String apellidoP, String apellidoM, String telefono, String correo, String username) {
+    public UsuarioViewDto(String nombre, String apellidoP, String apellidoM, String telefono, String correo, String username, String rol) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
         this.correo = correo;
         this.username = username;
+        this.rol = rol;
     }
 
     public String getNombre() {
@@ -68,6 +70,12 @@ public class UsuarioViewDto {
         this.username = username;
     }
 
+    public String getRol() { return rol; }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
     @Override
     public String toString() {
         return "UsuarioViewDto{" +
@@ -77,6 +85,7 @@ public class UsuarioViewDto {
                 ", telefono='" + telefono + '\'' +
                 ", correo='" + correo + '\'' +
                 ", username='" + username + '\'' +
+                ", rol='" + rol + '\'' +
                 '}';
     }
 }
