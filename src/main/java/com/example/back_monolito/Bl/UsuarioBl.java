@@ -26,6 +26,7 @@ public class UsuarioBl {
         List<Doctor> doctores = doctorRepository.findAll();
         for(Doctor doctor: doctores){
             UsuarioViewDto dto = new UsuarioViewDto();
+            dto.setIdUser(doctor.getIdDoctor());
             dto.setNombre(doctor.getPersona().getNombre());
             dto.setApellidoP(doctor.getPersona().getApellidoP());
             dto.setApellidoM(doctor.getPersona().getApellidoM());
@@ -40,6 +41,7 @@ public class UsuarioBl {
         List<Asistente> asistentes = asistenteRepository.findAll();
         for(Asistente asistente : asistentes){
             UsuarioViewDto dto = new UsuarioViewDto();
+            dto.setIdUser(asistente.getPersona().getIdPersona());
             dto.setNombre(asistente.getPersona().getNombre());
             dto.setApellidoP(asistente.getPersona().getApellidoP());
             dto.setApellidoM(asistente.getPersona().getApellidoM());

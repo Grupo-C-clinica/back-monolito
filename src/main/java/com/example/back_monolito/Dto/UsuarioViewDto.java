@@ -1,6 +1,7 @@
 package com.example.back_monolito.Dto;
 
 public class UsuarioViewDto {
+    private Integer idUser;
     private String nombre;
     private String apellidoP;
     private String apellidoM;
@@ -12,7 +13,8 @@ public class UsuarioViewDto {
     public UsuarioViewDto() {
     }
 
-    public UsuarioViewDto(String nombre, String apellidoP, String apellidoM, String telefono, String correo, String username, String rol) {
+    public UsuarioViewDto(Integer idUser, String nombre, String apellidoP, String apellidoM, String telefono, String correo, String username, String rol) {
+        this.idUser = idUser;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -21,6 +23,9 @@ public class UsuarioViewDto {
         this.username = username;
         this.rol = rol;
     }
+    public Integer getIdUser() { return idUser; }
+
+    public void setIdUser(Integer idUser){ this.idUser = idUser;}
 
     public String getNombre() {
         return nombre;
@@ -79,7 +84,8 @@ public class UsuarioViewDto {
     @Override
     public String toString() {
         return "UsuarioViewDto{" +
-                "nombre='" + nombre + '\'' +
+                "idUser='" + idUser + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", apellidoP='" + apellidoP + '\'' +
                 ", apellidoM='" + apellidoM + '\'' +
                 ", telefono='" + telefono + '\'' +
