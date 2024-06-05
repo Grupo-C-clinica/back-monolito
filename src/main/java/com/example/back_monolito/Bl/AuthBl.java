@@ -32,36 +32,24 @@ public class AuthBl {
 
     //Loguearse
     public TokenDto login(String username, String password) {
-        Doctor doctor = null;
-        Asistente asistente = null;
-        Admin admin = null;
-        String token = null;
-        for (int i = 0; i < 3; i++) {
-            if (i == 0) {
-                doctor = doctorRepository.findDoctorByUsernameAndPassword(username, password);
-                if (doctor != null) {
-                    token = generateToken(doctor.getIdDoctor());
-                    return new TokenDto(token, doctor.getIdDoctor(), "doctor", doctor.getPersona().getNombre());
-                }
-            }
-            if (i == 1) {
-                asistente = asistenteRepository.findAsistenteByUsernameAndPassword(username, password);
-                if (asistente != null) {
-                    token = generateToken(asistente.getIdAsistente());
-                    return new TokenDto(token, asistente.getIdAsistente(), "asistente", asistente.getPersona().getNombre());
-                }
-            }
-            if (i == 2) {
-                admin = adminRepository.findAdminByUsernameAndPassword(username, password);
-                if (admin != null) {
-                    token = generateToken(asistente.getIdAsistente());
-                    return new TokenDto(token, admin.getIdAdmin(), "admin", admin.getPersona().getNombre());
-                }
-            }
-            if (doctor == null && asistente == null && admin == null) {
-                throw new RuntimeException("Invalid credentials");
-            }
+        Doctor doctor = doctorRepository.findDoctorByUsernameAndPassword(username, password);
+        if (doctor != null) {
+            String token = generateToken(doctor.getIdDoctor());
+            return new TokenDto(token, doctor.getIdDoctor(), "doctor", doctor.getPersona().getNombre());
         }
+
+        Asistente asistente = asistenteRepository.findAsistenteByUsernameAndPassword(username, password);
+        if (asistente != null) {
+            String token = generateToken(asistente.getIdAsistente());
+            return new TokenDto(token, asistente.getIdAsistente(), "asistente", asistente.getPersona().getNombre());
+        }
+
+        Admin admin = adminRepository.findAdminByUsernameAndPassword(username, password);
+        if (admin != null) {
+            String token = generateToken(admin.getIdAdmin());
+            return new TokenDto(token, admin.getIdAdmin(), "admin", admin.getPersona().getNombre());
+        }
+
         throw new RuntimeException("Invalid credentials");
     }
 
