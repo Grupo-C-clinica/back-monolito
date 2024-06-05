@@ -1,19 +1,25 @@
 package com.example.back_monolito.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-public class CorsConfig implements WebMvcConfigurer {
+public class CorsConfig {
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")  // Permite CORS en todas las rutas
-                .allowedOrigins("https://grupo-c-clinica.github.io")  // Permite solicitudes desde este origen
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Métodos HTTP permitidos
-                .allowedHeaders("*")  // Permite todos los headers
-                .allowCredentials(true);  // Permite cookies y autenticación básica
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("https://grupo-c-clinica.github.io"); // Especifica el origen permitido
+        corsConfiguration.addAllowedHeader("*"); // Permite todos los headers
+        corsConfiguration.addAllowedMethod("*"); // Permite todos los métodos HTTP
+        corsConfiguration.setAllowCredentials(true); // Permite el uso de credenciales
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration); // Aplica la configuración a todas las rutas
+
+        return new CorsFilter(source);
     }
-
 }
