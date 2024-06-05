@@ -1,8 +1,10 @@
 package com.example.back_monolito.Bl;
 
+import com.example.back_monolito.Dao.AdminRepository;
 import com.example.back_monolito.Dao.AsistenteRepository;
 import com.example.back_monolito.Dao.DoctorRepository;
 import com.example.back_monolito.Dto.TokenDto;
+import com.example.back_monolito.Entity.Admin;
 import com.example.back_monolito.Entity.Asistente;
 import com.example.back_monolito.Entity.Doctor;
 import io.jsonwebtoken.Claims;
@@ -23,14 +25,18 @@ public class AuthBl {
     @Autowired
     private AsistenteRepository asistenteRepository;
 
+    @Autowired
+    private AdminRepository adminRepository;
+
     private final String SECRET_KEY = "llave_xd";
 
     //Loguearse
     public TokenDto login(String username, String password) {
         Doctor doctor = null;
         Asistente asistente = null;
+        Admin admin = null;
         String token = null;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             if (i == 0) {
                 doctor = doctorRepository.findDoctorByUsernameAndPassword(username, password);
                 if (doctor != null) {
@@ -44,9 +50,16 @@ public class AuthBl {
                     token = generateToken(asistente.getIdAsistente());
                     return new TokenDto(token, asistente.getIdAsistente(), "asistente");
                 }
-                if (doctor == null && asistente == null) {
-                    throw new RuntimeException("Invalid credentials");
+            }
+            if (i == 2) {
+                admin = adminRepository.findAdminByUsernameAndPassword(username, password);
+                if (admin != null) {
+                    token = generateToken(asistente.getIdAsistente());
+                    return new TokenDto(token, admin.getIdAdmin(), "admin");
                 }
+            }
+            if (doctor == null && asistente == null && admin == null) {
+                throw new RuntimeException("Invalid credentials");
             }
         }
         throw new RuntimeException("Invalid credentials");
