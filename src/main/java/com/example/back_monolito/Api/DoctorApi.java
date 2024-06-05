@@ -3,13 +3,17 @@ package com.example.back_monolito.Api;
 import com.example.back_monolito.Bl.AsistenteBl;
 import com.example.back_monolito.Bl.DoctorBl;
 import com.example.back_monolito.Bl.PersonaBl;
+import com.example.back_monolito.Bl.UsuarioBl;
 import com.example.back_monolito.Dto.DoctorDto;
 import com.example.back_monolito.Dto.PersonalRegisterDto;
 import com.example.back_monolito.Dto.ResponseDto;
+import com.example.back_monolito.Dto.UsuarioViewDto;
 import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/doctor")
@@ -17,7 +21,7 @@ public class DoctorApi {
     @Autowired
     private DoctorBl doctorBl;
     @Autowired
-    private PersonaBl personaBl;
+    private UsuarioBl usuarioBl;
     @Autowired
     private AsistenteBl asistenteBl;
 
@@ -58,7 +62,7 @@ public class DoctorApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al cambiar contraseña"));
         }
     }
-    @PutMapping(path = "eliminado/{idDoctor}")
+    @PutMapping(path = "/eliminado/{idDoctor}")
     public ResponseEntity<ResponseDto<DoctorDto>> eliminarDoctor(@PathVariable Integer idDoctor){
         try {
             doctorBl.eliminarDoctor(idDoctor);
@@ -66,5 +70,10 @@ public class DoctorApi {
         }catch (Exception e){
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error al borrar el doctor"));
         }
+    }
+    @GetMapping(path = "/allUsers")
+    public ResponseEntity<List<UsuarioViewDto>> obtenerTodosLosUsuarios(){
+        List<UsuarioViewDto> usuarios = usuarioBl.obtenerTodosLosUsuarios();
+        return ResponseEntity.ok(usuarios);
     }
 }
