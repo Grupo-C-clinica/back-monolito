@@ -65,3 +65,11 @@ VALUES
     ('Control de Rutina', true),
     ('Examen Médico', true),
     ('Seguimiento de Tratamiento', true);
+
+
+INSERT INTO persona (nombre, apellido_p, apellido_m, fecha_nacimiento, genero, telefono, ci, status)
+VALUES ('Bethany', 'Gilbody', 'Brand-Hardy', '2021-06-01', 'Female', '312-393-0836', '2468135790', TRUE);
+
+
+INSERT INTO admin (admin_id, id_persona, username, correo, password, status)
+VALUES (1, 1, 'admin', 'nuevo_admin@correo.com', 'admin', TRUE);
