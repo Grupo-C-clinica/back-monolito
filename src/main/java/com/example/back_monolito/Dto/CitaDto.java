@@ -1,5 +1,7 @@
 package com.example.back_monolito.Dto;
 
+import com.example.back_monolito.Entity.Paciente;
+
 import java.sql.Time;
 import java.util.Date;
 

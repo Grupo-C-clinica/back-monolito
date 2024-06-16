@@ -3,6 +3,7 @@ package com.example.back_monolito.Api;
 
 import com.example.back_monolito.Bl.CitaBl;
 import com.example.back_monolito.Dto.CitaDto;
+import com.example.back_monolito.Dto.CitaViewDto;
 import com.example.back_monolito.Dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,13 +55,13 @@ public class CitaApi {
     }
 
     @GetMapping("/all/{fecha}")
-    public ResponseEntity<ResponseDto<List<CitaDto>>> findAllByDate(@PathVariable String fecha) {
+    public ResponseEntity<ResponseDto<List<CitaViewDto>>> findAllByDate(@PathVariable String fecha) {
         try {
             // Convertir el String a Date
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDate = formatter.parse(fecha);
 
-            List<CitaDto> citaDto = citaBl.findAllByDate(fechaDate);
+            List<CitaViewDto> citaDto = citaBl.findAllByDate(fechaDate);
             return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Success"));
         } catch (ParseException e) {
             e.printStackTrace();

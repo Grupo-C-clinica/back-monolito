@@ -22,8 +22,9 @@ public class Cita {
     @JoinColumn(name = "ID_HORARIO", nullable = false)
     private Horario horario;
 
-    @Column(name = "ID_PACIENTE", nullable = false)
-    private Integer idPaciente;
+    @ManyToOne
+    @JoinColumn(name = "ID_PACIENTE", nullable = false)
+    private Paciente idPaciente;
 
     @Column(name = "ID_ASISTENTE", nullable = false)
     private Integer idAsistente;
@@ -41,7 +42,7 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(Integer idCita, TipoCita tipoCita, Horario horario, Integer idPaciente, Integer idAsistente, Time hora, Date fecha, String razon, Boolean status) {
+    public Cita(Integer idCita, TipoCita tipoCita, Horario horario, Paciente idPaciente, Integer idAsistente, Time hora, Date fecha, String razon, Boolean status) {
         this.idCita = idCita;
         this.tipoCita = tipoCita;
         this.horario = horario;
@@ -77,11 +78,11 @@ public class Cita {
         this.horario = horario;
     }
 
-    public Integer getIdPaciente() {
+    public Paciente getIdPaciente() {
         return idPaciente;
     }
 
-    public void setIdPaciente(Integer idPaciente) {
+    public void setIdPaciente(Paciente idPaciente) {
         this.idPaciente = idPaciente;
     }
 

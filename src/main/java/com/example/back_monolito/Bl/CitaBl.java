@@ -3,14 +3,17 @@ package com.example.back_monolito.Bl;
 
 import com.example.back_monolito.Dao.CitaRepository;
 import com.example.back_monolito.Dto.CitaDto;
+import com.example.back_monolito.Dto.CitaViewDto;
 import com.example.back_monolito.Entity.Cita;
 import com.example.back_monolito.Entity.Horario;
+import com.example.back_monolito.Entity.Paciente;
 import com.example.back_monolito.Entity.TipoCita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,12 +27,14 @@ public class CitaBl {
     public void createCita(CitaDto citaDto, Integer idAsistente){
         TipoCita tipoCita = new TipoCita();
         Horario horario = new Horario();
+        Paciente paciente = new Paciente();
         Cita cita = new Cita();
         tipoCita.setIdTipoCita(citaDto.getIdTipoCita());
         horario.setIdHorario(citaDto.getIdHorario());
+        paciente.setIdPaciente(citaDto.getIdPaciente());
         cita.setTipoCita(tipoCita);
         cita.setHorario(horario);
-        cita.setIdPaciente(citaDto.getIdPaciente());
+        cita.setIdPaciente(paciente);
         cita.setIdAsistente(idAsistente);
         cita.setFecha(citaDto.getFecha());
         cita.setHora(citaDto.getHora());
@@ -48,7 +53,7 @@ public class CitaBl {
             citaDtos.setIdCita(citas.getIdCita());
             citaDtos.setIdTipoCita(citas.getTipoCita().getIdTipoCita());
             citaDtos.setIdHorario(citas.getHorario().getIdHorario());
-            citaDtos.setIdPaciente(citas.getIdPaciente());
+            citaDtos.setIdPaciente(citas.getIdPaciente().getIdPaciente());
             citaDtos.setIdAsistente(citas.getIdAsistente());
             citaDtos.setFecha(citas.getFecha());
             citaDtos.setHora(citas.getHora());
@@ -67,7 +72,7 @@ public class CitaBl {
             citaDtos.setIdCita(citas.getIdCita());
             citaDtos.setIdTipoCita(citas.getTipoCita().getIdTipoCita());
             citaDtos.setIdHorario(citas.getHorario().getIdHorario());
-            citaDtos.setIdPaciente(citas.getIdPaciente());
+            citaDtos.setIdPaciente(citas.getIdPaciente().getIdPaciente());
             citaDtos.setIdAsistente(citas.getIdAsistente());
             citaDtos.setFecha(citas.getFecha());
             citaDtos.setHora(citas.getHora());
@@ -78,19 +83,18 @@ public class CitaBl {
         return citaDto;
     }
 
-    public List<CitaDto> findAllByDate (Date fecha){
+    public List<CitaViewDto> findAllByDate (Date fecha){
         List<Cita> cita = citaRepository.findAllCitasByFecha(fecha);
-        List<CitaDto> citaDto = new ArrayList<>();
+        List<CitaViewDto> citaDto = new ArrayList<>();
         for(Cita citas: cita){
-            CitaDto citaDtos = new CitaDto();
+            CitaViewDto citaDtos = new CitaViewDto();
             citaDtos.setIdCita(citas.getIdCita());
-            citaDtos.setIdTipoCita(citas.getTipoCita().getIdTipoCita());
-            citaDtos.setIdHorario(citas.getHorario().getIdHorario());
-            citaDtos.setIdPaciente(citas.getIdPaciente());
-            citaDtos.setIdAsistente(citas.getIdAsistente());
+            citaDtos.setIdPaciente(citas.getIdPaciente().getIdPaciente());
+            citaDtos.setNombrePaciente(citas.getIdPaciente().getPersona().getNombre());
+            citaDtos.setApellidoPPaciente(citas.getIdPaciente().getPersona().getApellidoP());
+            citaDtos.setApellidoMPaciente(citas.getIdPaciente().getPersona().getApellidoM());
             citaDtos.setFecha(citas.getFecha());
             citaDtos.setHora(citas.getHora());
-            citaDtos.setRazon(citas.getRazon());
             citaDtos.setEstado(citas.getStatus());
             citaDto.add(citaDtos);
         }
@@ -106,7 +110,7 @@ public class CitaBl {
             citaDto.setIdCita(cita.getIdCita());
             citaDto.setIdTipoCita(cita.getTipoCita().getIdTipoCita());
             citaDto.setIdHorario(cita.getHorario().getIdHorario());
-            citaDto.setIdPaciente(cita.getIdPaciente());
+            citaDto.setIdPaciente(cita.getIdPaciente().getIdPaciente());
             citaDto.setIdAsistente(cita.getIdAsistente());
             citaDto.setFecha(cita.getFecha());
             citaDto.setHora(cita.getHora());
