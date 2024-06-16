@@ -161,4 +161,22 @@ public class CitaBl {
             throw new RuntimeException("La cita con ID "+ citaId +" no existe");
         }
     }
+
+    public List<CitaViewDto> findAllByStatusFalse(){
+        List<Cita> citas = citaRepository.findAllByStatusFalse();
+        List<CitaViewDto> citaDto = new ArrayList<>();
+        for (Cita cita: citas) {
+            CitaViewDto citaViewDto = new CitaViewDto();
+            citaViewDto.setIdCita(cita.getIdCita());
+            citaViewDto.setIdPaciente(cita.getIdPaciente().getIdPaciente());
+            citaViewDto.setNombrePaciente(cita.getIdPaciente().getPersona().getNombre());
+            citaViewDto.setApellidoPPaciente(cita.getIdPaciente().getPersona().getApellidoP());
+            citaViewDto.setApellidoMPaciente(cita.getIdPaciente().getPersona().getApellidoM());
+            citaViewDto.setFecha(cita.getFecha());
+            citaViewDto.setHora(cita.getHora());
+            citaViewDto.setEstado(cita.getStatus());
+            citaDto.add(citaViewDto);
+        }
+        return citaDto;
+    }
 }

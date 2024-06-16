@@ -98,4 +98,14 @@ public class CitaApi {
             return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
         }
     }
+
+    @GetMapping("/status/false")
+    public ResponseEntity<ResponseDto<List<CitaViewDto>>> findAllByStatusTrue(){
+        try{
+            List<CitaViewDto> citaDto = citaBl.findAllByStatusFalse();
+            return ResponseEntity.ok(new ResponseDto<>(200, citaDto, "Success"));
+        }catch (Exception e){
+            return ResponseEntity.ok(new ResponseDto<>(500, null, "Error"));
+        }
+    }
 }
